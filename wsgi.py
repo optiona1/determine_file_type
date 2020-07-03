@@ -15,6 +15,8 @@ def upload():
             if in_times == 1:
                 chunk = chunk.split(b"\r\n\r\n")
                 file_type = magic.from_buffer(chunk[1])
+                filename = chunk[0].decode().split("\r\n")[1].split("; ")[2].split('="')[1].strip('"')
+                print(filename)
                 print(file_type)
                 f.write(chunk[1])
                 continue
@@ -26,5 +28,4 @@ def upload():
 
 
 if __name__ == '__main__':
-
     app.run(debug=True)
